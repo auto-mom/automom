@@ -127,22 +127,21 @@ export class DashboardComponent implements OnInit {
   }
 
   createRoom(cancelMeeting){
-    console.log("cancelMeeting",cancelMeeting)
+    //console.log("create room",cancelMeeting)
     this.generateRandomNumber();
     this.createVRoom.id = cancelMeeting._id;
     this.createVRoom.token = this.randomToken;
-    console.log("random token",this.randomToken)
-    console.log(this.createVRoom)
+    console.log("create room token",this.createVRoom.token)
+    //console.log(this.createVRoom)
     this.virtualService.createVirtualRoom(this.createVRoom).then(
       (res: any) => {
-        if (res) {
+        if (res.status == 'C') {
           this.createRoomData = res;
           console.log("create room response ",this.createRoomData);
-          // this.data.meetingData.forEach(user=>{
-          //   if(user._id == this.createVRoom.id){
-          //     user['isVirtualRoomCreated'] = true
-          //   }
-          // })
+          this.getMeeting();
+        }
+        else{
+          console.log('Create Virtual room err')
         }
       },
       (err: any) => {
