@@ -32,6 +32,7 @@ export class DashboardComponent implements OnInit {
   joinVirtualRoomReqObj: JoinVirtualRoom;
   meetingId: any;
   activeMeetings: Array<Object> = [];
+  confirmCancelMeeting: any = {};
 
   constructor(
     public meetService: MeetingService,
@@ -82,13 +83,22 @@ export class DashboardComponent implements OnInit {
     this.auth.isUserAuthenticated = false;
     this.router.navigate(["/authentication/register"]);
   }
+
+  confirmCancel(meeting) {
+    this.confirmCancelMeeting = meeting;
+    console.log('Confirm Cancel', meeting);
+  }
+
   cancel(cancelMeeting) {
     this.cancelData.id = cancelMeeting._id;
     this.cancelData.status = "n";
     this.meetService.cancelData(this.cancelData).then(
       (res: any) => {
-        if (res) {
+        if (res.status == 'C') {
           this.getMeeting();
+        }
+        else {
+          console.log('Cancel Meeting error')
         }
       },
       (err: any) => {
