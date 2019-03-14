@@ -1,0 +1,180 @@
+// Resetters
+.p-none {
+    padding: 0px !important;
+}
+.p-left{
+    padding-left: 0px !important;
+}
+.p-right{
+    padding-right: 0px !important;
+}
+.m-none {
+    margin: 0px !important;
+}
+.pl-10{
+    padding-left: 10px !important;
+}
+.pl-20{
+    padding-left: 20px !important;
+}
+.mt-20{
+    margin-top: 20px;
+}
+.mb-20{
+    margin-bottom: 16px;
+}
+.mb-10{
+    margin-bottom: 10px;
+}
+.mr-10{
+    margin-right: 10px;
+}
+/* You can add global styles to this file, and also import other style files */
+
+.form-main-block {
+    margin-bottom: 20px;
+}
+
+.button-block {
+    text-align: center;
+}
+
+.left-panel {
+    background-color: black;
+    min-height: 100vh;
+}
+
+.right-panel {
+    padding-top: 100px;
+}
+
+.img-center {
+    display: flex;
+    justify-content: center;
+    padding-top: 243px;
+}
+
+.bg-color {
+    background-color: black;
+}
+
+.main-dashboard {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+///*****************dashboard*************************///
+.align-center {
+    align-self: center
+}
+
+.capcologo {
+    width: 100%;
+    height: auto;
+    color: white;
+}
+
+.create-meeting {
+    font-size: 20px;
+}
+
+.nav-content {
+    width: 100%;
+}
+
+.logout {
+    text-align-last: end;
+    align-self: center
+}
+
+.up-meeting {
+    color: #343a40;
+    font-size: 20px;
+    padding-top: 10px;
+}
+
+.date {
+    color: #343a40;
+    font-size: 16px;
+}
+
+.acc-block {
+    padding-top: 23px;
+}
+
+.card-block {
+    // 
+    background-color: #626ed4;
+    border: 2px solid #626ed4;
+    border-radius: 4px;
+    padding: 7px;
+}
+
+.main-card {
+    margin-top: 30px;
+}
+
+.font {
+    font-size: 14px;
+    color: #f0faff;
+}
+
+.icon {
+    background-color: #7984da;
+    padding-top: 18px;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+.img-icon {
+    width: 30px;
+}
+
+.main-card {
+    padding-left: 28px;
+    padding-right: 30px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.heading {
+    font-size: 20px;
+    color: #acb7ea;
+}
+
+.card-time {
+    color: #a4b7e8;
+    padding-top: 10px;
+}
+
+.join-meeting {
+    //padding-left: 1px;
+}
+
+.join-btn1 {
+    // width: 195px;
+    display: flex;
+    justify-content: center;
+}
+
+.edit-btn {
+    margin-top: 5px;
+    display: flex;
+    justify-content: flex-end;
+}
+.edit-btn2{
+    padding-left: 22px !important;
+    padding-right: 17px !important;
+}
+
+.cancel-btn {
+    margin-top: 5px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.disp-cen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

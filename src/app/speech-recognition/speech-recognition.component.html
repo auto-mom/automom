@@ -1,0 +1,20 @@
+<section>
+  <header class="text-center">
+    <h2>
+      Speech to text
+    </h2>
+  </header>
+  <main class="text-center">
+    <button class="btn btn-success" (click)="startButton($event)" *ngIf="!recognizing">Start</button>
+    <button class="btn btn-danger" *ngIf="recognizing" (click)="stopButton()">Stop</button>
+
+    <p>
+      {{ finalTranscript }}
+    </p>
+
+    <p *ngIf="notification" class="notification">{{notification}}</p>
+  </main>
+  <footer>
+
+  </footer>
+</section>

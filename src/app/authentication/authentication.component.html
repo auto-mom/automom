@@ -1,0 +1,39 @@
+<div>
+  <div class="row m-none">
+    <div class="col-sm-12 p-none main-content">
+      <div class="row m-none">
+        <section class="col-sm-4 left-panel disp-cen">
+          <div>
+            <img src="logo.jpg" alt="">
+          </div>
+        </section>
+        <section class="col-sm-8 right-panel">
+          <div class="container form-wrapper">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+              <li class="nav-item" (click)="getURL()">
+                <a [ngClass]="(router.url == '/authentication' || router.url == '/authentication/register') ? 'nav-link active':'nav-link'" [routerLink]="['register']" data-toggle="tab">
+                  Registration
+                </a>
+              </li>
+              <li class="nav-item">
+                <a [ngClass]="router.url == '/authentication/login'? 'nav-link active':'nav-link'" [routerLink]="['login']" data-toggle="tab">
+                  Login
+                </a>
+              </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content mt-4">
+              <div class=" container tab-pane active">
+                <router-outlet></router-outlet>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+
+  </div>
+</div>
