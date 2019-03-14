@@ -32,6 +32,7 @@ export class DashboardComponent implements OnInit {
   joinVirtualRoomReqObj: JoinVirtualRoom;
   meetingId: any;
   activeMeetings: Array<Object> = [];
+  displayCreateMeetingForm: boolean = false;
 
   constructor(
     public meetService: MeetingService,
@@ -149,5 +150,12 @@ export class DashboardComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+  getObjectFromCreateMeeting(data){
+    console.log(data)
+    if(data.meetingCreated){
+      this.displayCreateMeetingForm = false;
+      this.getMeeting();
+    }
   }
 }

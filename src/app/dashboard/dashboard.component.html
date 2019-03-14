@@ -27,14 +27,14 @@
     <div class="card-header" id="headingThree">
       <h5 class="mb-0">
         <button class="btn btn-primary collapsed create-meeting" data-toggle="collapse" data-target="#collapseThree"
-          [routerLink]=" ['meetingRequest'] " aria-expanded="false" aria-controls="collapseThree">
+          (click)="displayCreateMeetingForm = true" aria-expanded="false" aria-controls="collapseThree">
           <img src="../../assets/svg-icons/plus.svg" class="add-icon mr-2" />Create Meeting Request
         </button>
       </h5>
     </div>
     <div id="collapseThree" class="collapse justify-content-center" aria-labelledby="headingThree"
-      data-parent="#accordion">
-      <router-outlet></router-outlet>
+      data-parent="#accordion" *ngIf="displayCreateMeetingForm">
+      <app-create-meeting-request (postData)="getObjectFromCreateMeeting($event)"></app-create-meeting-request>
     </div>
   </div>
 </div>
