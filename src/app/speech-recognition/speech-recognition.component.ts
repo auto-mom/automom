@@ -32,7 +32,6 @@ export class SpeechRecognitionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initIoConnection();
     this.currentLanguage = 'en-US';
     this.speechRecognizer.initialize(this.currentLanguage);
     this.initRecognition();
@@ -45,7 +44,6 @@ export class SpeechRecognitionComponent implements OnInit {
     this.ioConnection = this.socketService.onMessage()
       .subscribe((message: Message) => {
         this.messages.push(message);
-        // console.log(this.messages)
       });
 
 
@@ -54,11 +52,8 @@ export class SpeechRecognitionComponent implements OnInit {
         console.log('connected to socket');
       });
 
-    this.socketService.onEvent(this.event.DISCONNECT)
-      .subscribe(() => {
-        console.log('disconnected');
-      });
   }
+  //this.initIoConnection();
   
   sendMessage(message: any): void {
     this.socketService.send(message);
@@ -73,7 +68,7 @@ export class SpeechRecognitionComponent implements OnInit {
       this.speechRecognizer.stop();
       return;
     }
-
+    this.initIoConnection();
     this.speechRecognizer.start(event.timeStamp);
   }
 
@@ -110,7 +105,7 @@ export class SpeechRecognitionComponent implements OnInit {
           this.detectChanges();
           this.actionContext.runAction(message, this.currentLanguage);
           this.sendMessage(message);
-          console.log('message: ',message);
+          console.log('message:',message);
         }
       });
 

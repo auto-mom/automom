@@ -66,7 +66,7 @@
                   <button type="button" data-toggle="modal" data-target="#editMeetingModal" class="btn btn-success edit-btn2">Edit</button>
                 </div>
                 <div class="col-xs-6 cancel-btn p-left p--right">
-                  <button type="button" (click)="cancel(meetingData)" class="btn btn-danger">Cancel</button>
+                  <button type="button" data-toggle="modal" data-target="#confirmDelete" (click)="confirmCancel(meetingData)" class="btn btn-danger">Cancel</button>
                 </div>
               </div>
             </div>
@@ -129,7 +129,6 @@
         <form #acceptTokenForm="ngForm" novalidate>
           <input type="text" class="form-control" [(ngModel)]="joinVirtualRoomReqObj.token" name="token" id="token"
             placeholder="Enter Token Here" required>
-            {{ joinVirtualRoomReqObj.token }}
           <div class="justify-content-end d-flex">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary" data-dismiss="modal"   (click)="joinVirtualRoom(joinVirtualRoomReqObj)">Enter</button>
@@ -155,6 +154,31 @@
         <form #editMeetingModal="ngForm" novalidate>
           <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia impedit, quisquam sunt doloribus laborum nemo error odit tenetur culpa! Porro delectus consequatur magni sapiente unde rem a assumenda at pariatur.</p>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm delete Modal -->
+<div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="confirmDelete"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cancel Meeting</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <p>
+            Do you want to cancel meeting?
+          </p>
+      </div>
+      <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-danger" (click)="cancel(confirmCancelMeeting)">
+          Cancel
+        </button>
       </div>
     </div>
   </div>
