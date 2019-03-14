@@ -1,0 +1,34 @@
+.grid-container{
+    display:grid;
+    min-height: 100%;
+    grid-template-rows: 50px auto; 
+    min-height: 100vh;
+    padding: 2vh;
+}
+.main-content{
+    display:grid;
+    grid-template-rows: auto 50px; 
+}
+.message-content-container{
+    display:grid;
+    grid-template-rows: 50px 50px auto; 
+}
+.message-content{
+    display:grid;
+    grid-template-columns: 100px auto;
+}
+.message-box{
+    display: grid;
+    height: 50px;
+    align-self: end;
+    text-align: justify;
+}
+.message-input{
+    display: grid;
+    grid-template-columns: auto 100px;
+    align-content: end;
+    // grid-gap:10px
+}
+// .left-panel {
+//     min-height: 100vh;
+// }

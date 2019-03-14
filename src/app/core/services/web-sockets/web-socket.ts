@@ -14,14 +14,9 @@ export class WebSocketService {
         this.socket = socketIo(SERVER_URL);
     }
 
-    send(message: any): void {
-        let speech = {
-            id: '5c889bfcb8d5ed0004d679c5',
-            message: message,
-            sender: 'dummy',
-            timestamp: new Date()
-        }
-        this.socket.emit('chat message', JSON.stringify(speech));
+    send(data: any): void {
+        console.log("data",data)
+        this.socket.emit('chat message', JSON.stringify(data));
     }
 
     onMessage(): Observable<Message> {

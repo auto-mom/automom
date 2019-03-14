@@ -7,6 +7,7 @@ import { SpeechNotification } from '../shared/models/speech-models/speech-notifi
 import { SpeechError } from '../shared/models/speech-models/speech-error';
 import { ActionContext } from '../shared/models/speech-models/strategy/action-context';
 import { SpeechRecognizerService } from '../core/services/speech-services/speech-recognizer.service';
+import { VirtualRoomService } from '../core/services/virtualRoom/virtual-room';
 
 @Component({
   selector: 'app-speech-recognition',
@@ -23,12 +24,15 @@ export class SpeechRecognitionComponent implements OnInit {
   notification: string;
   languages: string[] = ['en-US', 'es-ES'];
   currentLanguage: string;
-
+  userName: string = sessionStorage.getItem('UserName')
   actionContext: ActionContext = new ActionContext();
+  meetingId: string;
   constructor(private socketService: WebSocketService,
     private changeDetector: ChangeDetectorRef,
-    private speechRecognizer: SpeechRecognizerService) {
+    private speechRecognizer: SpeechRecognizerService,
+    private virtualRoomService: VirtualRoomService) {
     this.event = new Event()
+    this.meetingId = this.virtualRoomService.getMeetingId()
   }
 
   ngOnInit() {
@@ -45,12 +49,12 @@ export class SpeechRecognitionComponent implements OnInit {
     this.ioConnection = this.socketService.onMessage()
       .subscribe((message: Message) => {
         this.messages.push(message);
-        // console.log(this.messages)
+        console.log(this.messages)
       });
 
 
     this.socketService.onEvent(this.event.CONNECT)
-      .subscribe(() => {                                                                                                        
+      .subscribe(() => {
         console.log('connected to socket');
       });
 
@@ -59,8 +63,9 @@ export class SpeechRecognitionComponent implements OnInit {
         console.log('disconnected');
       });
   }
-  
+
   sendMessage(message: any): void {
+    console.log(message)
     this.socketService.send(message);
   }
 
@@ -109,8 +114,16 @@ export class SpeechRecognitionComponent implements OnInit {
           this.actionContext.processMessage(message, this.currentLanguage);
           this.detectChanges();
           this.actionContext.runAction(message, this.currentLanguage);
-          this.sendMessage(message);
-          console.log('message: ',message);
+          const postData = {
+            id: this.meetingId,
+            sender: this.userName,
+            message: this.finalTranscript,
+            timeStamp: new Date(),
+          }
+          this.messages.push(postData)
+          console.log("postData", this.messages)
+          this.sendMessage(postData);
+          console.log('message: ', message);
         }
       });
 
@@ -140,6 +153,18 @@ export class SpeechRecognitionComponent implements OnInit {
 
   detectChanges() {
     this.changeDetector.detectChanges();
+  }
+
+  sendTextMessage(message: any) {
+    const postData = {
+      id: this.meetingId,
+      sender: this.userName,
+      message: message,
+      timeStamp: new Date(),
+    }
+    this.messages.push(postData);
+    console.log(postData)
+    this.sendMessage(postData);
   }
 
 }
