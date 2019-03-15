@@ -47,6 +47,7 @@ export class DashboardComponent implements OnInit {
   Editparticipant: Array<string> = [];
   editAllData: Array<Object> = [];
   editMeetingFlag: boolean = false;
+  confirmCancelMeeting: any;
 
   constructor(
     public meetService: MeetingService,
