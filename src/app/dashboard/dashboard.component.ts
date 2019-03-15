@@ -33,6 +33,7 @@ export class DashboardComponent implements OnInit {
   meetingId: any;
   activeMeetings: Array<Object> = [];
   displayCreateMeetingForm: boolean = false;
+  confirmCancelMeeting: any = {};
 
   constructor(
     public meetService: MeetingService,
@@ -83,13 +84,22 @@ export class DashboardComponent implements OnInit {
     this.auth.isUserAuthenticated = false;
     this.router.navigate(["/authentication/register"]);
   }
+
+  confirmCancel(meeting) {
+    this.confirmCancelMeeting = meeting;
+    console.log('Confirm Cancel', meeting);
+  }
+
   cancel(cancelMeeting) {
     this.cancelData.id = cancelMeeting._id;
     this.cancelData.status = "n";
     this.meetService.cancelData(this.cancelData).then(
       (res: any) => {
-        if (res) {
+        if (res.status == 'C') {
           this.getMeeting();
+        }
+        else {
+          console.log('Cancel Meeting error')
         }
       },
       (err: any) => {
@@ -130,22 +140,21 @@ export class DashboardComponent implements OnInit {
   }
 
   createRoom(cancelMeeting){
-    console.log("cancelMeeting",cancelMeeting)
+    //console.log("create room",cancelMeeting)
     this.generateRandomNumber();
     this.createVRoom.id = cancelMeeting._id;
     this.createVRoom.token = this.randomToken;
-    console.log("random token",this.randomToken)
-    console.log(this.createVRoom)
+    console.log("create room token",this.createVRoom.token)
+    //console.log(this.createVRoom)
     this.virtualService.createVirtualRoom(this.createVRoom).then(
       (res: any) => {
-        if (res) {
+        if (res.status == 'C') {
           this.createRoomData = res;
           console.log("create room response ",this.createRoomData);
-          // this.data.meetingData.forEach(user=>{
-          //   if(user._id == this.createVRoom.id){
-          //     user['isVirtualRoomCreated'] = true
-          //   }
-          // })
+          this.getMeeting();
+        }
+        else{
+          console.log('Create Virtual room err')
         }
       },
       (err: any) => {
