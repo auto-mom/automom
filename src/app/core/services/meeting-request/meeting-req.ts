@@ -44,4 +44,18 @@ export class MeetingService {
       );
     });
   }
+
+  // edit meeting
+  editData(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.httpPut("meeting/update", data).then(
+        res => {
+          resolve(res);
+        },
+        err => {
+          reject(err.error);
+        }
+      );
+    });
+  }
 }

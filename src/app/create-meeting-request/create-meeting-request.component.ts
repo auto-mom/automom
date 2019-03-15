@@ -60,19 +60,6 @@ export class CreateMeetingRequestComponent implements OnInit {
   }
   onSubmit() {
     console.log(this.meetingRequest)
-
-    const data =
-    {
-      "participantEmail": [
-        "noopur.singh@capco.com"
-      ],
-      "organizerEmail": "pranjal.nartam@capco.com",
-      "meetingDate": "2019-02-28",
-      "startTime": "05:05:05",
-      "endTime": "10:10:10",
-      "agenda": "r u ok?",
-      "location": "Skype"
-    }
     const endTime = (this.meetingRequest.value.etime.hour + ":" + this.meetingRequest.value.etime.minute + ":" + this.meetingRequest.value.etime.second)
     const startTime = (this.meetingRequest.value.stime.hour + ":" + this.meetingRequest.value.stime.minute + ":" + this.meetingRequest.value.stime.second)
     this.createMeetingData.participantEmail = this.emailArr;

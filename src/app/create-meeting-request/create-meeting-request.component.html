@@ -1,91 +1,86 @@
 <form class="form-group justify-content-center w-60 mt-5 meeting-request-form" [formGroup]="meetingRequest"
-    (ngSubmit)="onSubmit()">
-    <div class="form-group row">
-        <div class="col-lg-4"><label for="agenda" class="mr-5">Agenda:</label></div>
-        <div class="col-lg-7"><input type="text" placeholder="Agenda" formControlName="agenda" name="agenda"
-                class="form-control" id="agenda" required></div>
+(ngSubmit)="onSubmit()">
+<div class="form-group row">
+    <div class="col-lg-4"><label for="agenda" class="mr-5">Agenda:</label></div>
+    <div class="col-lg-7"><input type="text" placeholder="Agenda" formControlName="agenda" name="agenda"
+            class="form-control" id="agenda" required></div>
+</div>
+<div class="alert alert-danger" *ngIf="request.agenda.touched && request.agenda.errors">
+Agenda is required
+</div>
+<div class="form-group row">
+    <div class="col-lg-4"><label for="location" class="mr-5">Location:</label></div>
+    <div class="col-lg-7"><input type="text" placeholder="Location" formControlName="location" name="location"
+            class="form-control" id="location" required></div>
+</div>
+<div class="alert alert-danger" *ngIf="request.location.touched && request.location.errors">
+    Location is required
+  </div>
+<div class="form-group row">
+    <div class="col-lg-4"><label for="Date" class="mr-5">Date:</label></div>
+    <div class="col-lg-7">
+            <input class="form-control" type="date" placeholder="yyyy-mm-dd" formControlName="dateInput"
+                name="dateInput" id="dateInput" required>
     </div>
-    <!-- <div class="alert alert-danger" *ngIf="request.agenda.touched && request.agenda.errors">
-    Agenda is required
-  </div> -->
-    <div class="form-group row">
-        <div class="col-lg-4"><label for="location" class="mr-5">Location:</label></div>
-        <div class="col-lg-7"><input type="text" placeholder="Location" formControlName="location" name="location"
-                class="form-control" id="location" required></div>
+</div>
+<div class="alert alert-danger" *ngIf="request.dateInput.touched && request.dateInput.errors">
+    Date is required
+  </div>
+<div class="form-group row">
+    <div class="col-lg-4 align-center"><label for="stime" class="mr-5">Start Time:</label></div>
+    <div class="col-lg-7">
+        <ngb-timepicker formControlName="stime" [spinners]="false"></ngb-timepicker>
     </div>
-    <div class="form-group row">
-        <div class="col-lg-4"><label for="Date" class="mr-5">Date:</label></div>
-        <div class="col-lg-7">
-            <!-- <div class="col-sm-11"> -->
-                <input class="form-control" type="date" placeholder="yyyy-mm-dd" formControlName="dateInput"
-                    name="dateInput" id="dateInput" required>
-                <!-- </div> -->
-            <!-- <div class="col-sm-1 row">
-                <div class="col-md-10">
-                    <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
-                        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                    </button>
-                    <div id="collapseExample" [ngbCollapse]="!isCollapsed" class="col-md-2">
-                        <ngb-datepicker #dp class="calendar" (navigate)="date = $event.next"
-                            (select)="editDate=$event.day; onDateSelect($event)"></ngb-datepicker>
-                    </div>
-                </div>
-            </div> -->
-        </div>
+</div>
+<div class="form-group row">
+    <div class="col-lg-4 align-center"><label for="etime" class="mr-5">End Time:</label></div>
+    <div class="col-lg-7">
+        <ngb-timepicker formControlName="etime" id="etime" [spinners]="false" ></ngb-timepicker>
     </div>
-    <div class="form-group row">
-        <div class="col-lg-4 align-center"><label for="stime" class="mr-5">Start Time:</label></div>
-        <div class="col-lg-7">
-            <ngb-timepicker formControlName="stime" [spinners]="false"></ngb-timepicker>
-        </div>
+</div>
+<div class="form-group row">
+    <div class="col-lg-4"><label for="orgEmail" class="mr-5">Organizer Email:</label></div>
+    <div class="col-lg-7"><input type="email" placeholder="Organizer's Email" formControlName="orgEmail"
+            name="orgEmail" class="form-control" id="orgEmail" disabled></div>
+</div>
+<div class="form-group row">
+    <div class="col-lg-4"><label for="parEmail" class="mr-5 participant-email-label">Participant Email:</label>
     </div>
-    <div class="form-group row">
-        <div class="col-lg-4 align-center"><label for="etime" class="mr-5">End Time:</label></div>
-        <div class="col-lg-7">
-            <ngb-timepicker formControlName="etime" id="etime" [spinners]="false" ></ngb-timepicker>
-        </div>
-    </div>
-    <div class="form-group row">
-        <div class="col-lg-4"><label for="orgEmail" class="mr-5">Organizer Email:</label></div>
-        <div class="col-lg-7"><input type="email" placeholder="Organizer's Email" formControlName="orgEmail"
-                name="orgEmail" class="form-control" id="orgEmail" disabled></div>
-    </div>
-    <div class="form-group row">
-        <div class="col-lg-4"><label for="parEmail" class="mr-5 participant-email-label">Participant Email:</label>
-        </div>
-        <div class="col-lg-8">
-            <div *ngIf="emailArr.length!=0">
-                <div class="row participant-email" *ngFor="let email of emailArr; let i=index">
-                    <div class="col-md-8 align-center">{{email}}</div>
-                    <div class="col-md-4"><button class="btn btn-outline-danger"
-                            (click)="removeParticipant(email); $event.preventDefault()"><i
-                                class="fa fa-trash-o delete-icon" aria-hidden="true"></i></button></div>
-                </div>
+    <div class="col-lg-8">
+        <div *ngIf="emailArr.length!=0">
+            <div class="row participant-email" *ngFor="let email of emailArr; let i=index">
+                <div class="col-md-8 align-center">{{email}}</div>
+                <div class="col-md-4"><button class="btn btn-outline-danger"
+                        (click)="removeParticipant(email); $event.preventDefault()"><i
+                            class="fa fa-trash-o delete-icon" aria-hidden="true"></i></button></div>
             </div>
-            <div class="row">
-                <div class="col-xl-7 col-lg-6">
-                    <input type="email" formControlName="parEmail" placeholder="Participant's Email" name="parEmail"
-                        class="form-control" id="parEmail" required (blur)="validateParticipantEmail()">
-                </div>
-                <div class="col-xl-5 col-lg-6">
-                    <button class="btn btn-primary" [disabled]='!meetingRequest.value.parEmail'
-                        (click)="addParticipant(request.parEmail.value); $event.preventDefault()">Add
-                        Participant</button>
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-7 col-lg-6">
+                <input type="email" formControlName="parEmail" placeholder="Participant's Email" name="parEmail"
+                    class="form-control" id="parEmail" required>
+            </div>
+            <div class="col-xl-5 col-lg-6">
+                <button class="btn btn-primary" [disabled]='!meetingRequest.value.parEmail'
+                    (click)="addParticipant(request.parEmail.value); $event.preventDefault()">Add
+                    Participant</button>
             </div>
         </div>
     </div>
-    <div class="alert alert-danger" *ngIf="request.parEmail.touched && request.parEmail.errors">
-        <div *ngIf="request.parEmail.errors.required">
-            Participant's Email is required
-        </div>
+</div>
+<div class="alert alert-danger" *ngIf="request.parEmail.touched && request.parEmail.errors">
+    <div *ngIf="request.parEmail.errors.required">
+        Participant's Email is required
     </div>
-    <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-8 mt-2 mb-5">
-            <button type="submit" class="btn btn-primary submit-button"
-                [disabled]="meetingRequest.invalid">Submit</button>
-        </div>
+    <div *ngIf="request.parEmail.errors.pattern && !request.parEmail.errors.required">
+        Email should be of format (xxxx@capco.com)
+      </div>
+</div>
+<div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-8 mt-2 mb-5">
+        <button type="submit" class="btn btn-primary submit-button"
+            [disabled]="meetingRequest.invalid">Submit</button>
     </div>
+</div>
 </form>

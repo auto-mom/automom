@@ -22,6 +22,17 @@ export class GetMeetingData {
     status: string
 }
 
+export class EditMeetingData {
+    participantEmail: Array<string>;
+    organizerEmail: string;
+    meetingDate: string;
+    startTime: string;
+    endTime: string;
+    agenda: string;
+    location: string;
+    id : string;
+}
+
 export class MeetingData {
     meetingData: GetMeetingData[];
 }
