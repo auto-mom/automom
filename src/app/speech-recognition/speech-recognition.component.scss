@@ -1,34 +1,29 @@
 .grid-container{
-    display:grid;
-    min-height: 100%;
-    grid-template-rows: 50px auto; 
-    min-height: 100vh;
-    padding: 2vh;
-}
-.main-content{
-    display:grid;
-    grid-template-rows: auto 50px; 
-}
-.message-content-container{
-    display:grid;
-    grid-template-rows: 50px 50px auto; 
-}
-.message-content{
-    display:grid;
-    grid-template-columns: 100px auto;
-}
-.message-box{
     display: grid;
-    height: 50px;
-    align-self: end;
-    text-align: justify;
+    grid-template-rows: 50px 50px auto 50px;
 }
-.message-input{
+.min-height{
+    min-height: 50px;
+}
+.speech-container{
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 50px auto;
+}
+.form-container{
     display: grid;
     grid-template-columns: auto 100px;
-    align-content: end;
-    // grid-gap:10px
 }
-// .left-panel {
-//     min-height: 100vh;
-// }
+.action-button{
+    display: grid;
+}
+.justify-self-center{
+    justify-self:center
+}
+.message-box{
+    grid-template-columns: 100px auto;
+    display: grid;
+}
+.sender-name{
+    color: #0064b8
+}

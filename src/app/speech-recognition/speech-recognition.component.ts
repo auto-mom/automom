@@ -117,13 +117,13 @@ export class SpeechRecognitionComponent implements OnInit {
           const postData = {
             id: this.meetingId,
             sender: this.userName,
-            message: this.finalTranscript,
+            message: message,
             timeStamp: new Date(),
           }
           this.messages.push(postData)
           console.log("postData", this.messages)
           this.sendMessage(postData);
-          console.log('message: ', message);
+          console.log('message: ', this.messages);
         }
       });
 
@@ -163,7 +163,7 @@ export class SpeechRecognitionComponent implements OnInit {
       timeStamp: new Date(),
     }
     this.messages.push(postData);
-    console.log(postData)
+    console.log(this.messages)
     this.sendMessage(postData);
   }
 
