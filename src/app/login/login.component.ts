@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit {
           console.log(res.token);
           sessionStorage.setItem("emailID", this.loginData.email);
           sessionStorage.setItem("token", res.token);
+          sessionStorage.setItem("UserName", (res.user.firstName +" "+res.user.lastName));
           this.router.navigate(["/dashboard"]);
         }
       },

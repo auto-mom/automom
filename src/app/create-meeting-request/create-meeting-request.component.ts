@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap'
 import { MeetingService } from '../core/services/meeting-request/meeting-req';
@@ -12,6 +12,7 @@ import { CreateMeetingPostData } from '../shared/models/meeting.model';
 export class CreateMeetingRequestComponent implements OnInit {
 
   @ViewChild(NgbDatepicker) d: NgbDatepicker;
+  @Output() postData = new EventEmitter();
   meetingRequest: FormGroup
   request: any;
   selectedDate: any;
@@ -85,6 +86,11 @@ export class CreateMeetingRequestComponent implements OnInit {
     console.log(this.createMeetingData)
     this.meetingService.postMeetingData(this.createMeetingData).then((res: any) => {
       console.log("meetingService", res)
+      this.meetingRequest.reset();
+      const objectToDashboard = {
+        meetingCreated: true
+      }
+      this.postData.emit(objectToDashboard)
     },
       (err: any) => {
         console.log("meetingService", err)

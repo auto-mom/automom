@@ -1,5 +1,6 @@
 export class Message {
-    name: string;
+    id: string;
+    sender: string;
     message: string;
-    timeStamp: string;
+    timeStamp: any;
 }

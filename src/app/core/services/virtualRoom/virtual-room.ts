@@ -35,7 +35,7 @@ export class VirtualRoomService {
   }
 
   setMeetingId(ID: any){
-    this.meetingID=''
+    this.meetingID=ID
   }
 
   getMeetingId(){

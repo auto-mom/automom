@@ -32,6 +32,7 @@ export class DashboardComponent implements OnInit {
   joinVirtualRoomReqObj: JoinVirtualRoom;
   meetingId: any;
   activeMeetings: Array<Object> = [];
+  displayCreateMeetingForm: boolean = false;
   confirmCancelMeeting: any = {};
 
   constructor(
@@ -121,10 +122,12 @@ export class DashboardComponent implements OnInit {
     debugger
     console.log("meetingId",this.meetingId)
     console.log("joinVirtualRoomReqObj",this.joinVirtualRoomReqObj)
+
     this.virtualService.joinVirtualRoom(this.joinVirtualRoomReqObj).then((res:any)=>{
       if(res.status == 'C') {
         console.log(res);
         if(res)
+        this.virtualService.setMeetingId(this.meetingId)
         this.router.navigate(["/speechRecognition"]);
       }
       else{
@@ -158,5 +161,12 @@ export class DashboardComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+  getObjectFromCreateMeeting(data){
+    console.log(data)
+    if(data.meetingCreated){
+      this.displayCreateMeetingForm = false;
+      this.getMeeting();
+    }
   }
 }
