@@ -63,7 +63,7 @@
               </div>
               <div class="row disp-cen" *ngIf="meetingData.organizerEmail == emailData.email">
                 <div class="col-xs-6 edit-btn">
-                  <button type="button" data-toggle="modal" data-target="#editMeetingModal" class="btn btn-success edit-btn2">Edit</button>
+                  <button type="button" data-toggle="modal" data-target="#editMeetingModal" (click)="editMeeting(meetingData)" class="btn btn-success edit-btn2">Edit</button>
                 </div>
                 <div class="col-xs-6 cancel-btn p-left p--right">
                   <button type="button" data-toggle="modal" data-target="#confirmDelete" (click)="confirmCancel(meetingData)" class="btn btn-danger">Cancel</button>
@@ -141,20 +141,102 @@
 
 <!-- Edit Meeting Modal -->
 <div class="modal fade" id="editMeetingModal" tabindex="-1" role="dialog" aria-labelledby="acceptTokenModal"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Meeting</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+aria-hidden="true" *ngIf="editMeetingFlag">
+<div class="modal-dialog modal-lg" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Edit Meeting</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form class="form-group" [formGroup]="editReq" (ngSubmit)="onEditSubmit(editAllData)">
+        <div class="form-group row">
+          <div class="col-lg-4"><label for="agenda" class="mr-5">Agenda:</label></div>
+          <div class="col-lg-7"><input type="text"  placeholder="Agenda" formControlName="agenda" name="agenda"
+                  class="form-control" id="agenda" required></div>
       </div>
-      <div class="modal-body">
-        <form #editMeetingModal="ngForm" novalidate>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia impedit, quisquam sunt doloribus laborum nemo error odit tenetur culpa! Porro delectus consequatur magni sapiente unde rem a assumenda at pariatur.</p>
-        </form>
+      <div class="alert alert-danger" *ngIf="editRequest.agenda.touched && editRequest.agenda.errors">
+        Agenda is required
       </div>
+      <div class="form-group row">
+        <div class="col-lg-4"><label for="location" class="mr-5">Location:</label></div>
+        <div class="col-lg-7"><input type="text"  placeholder="" formControlName="location" name="location" ng-model="editlocation"
+                class="form-control" id="location" required></div>
+    </div>
+    <div class="alert alert-danger" *ngIf="editRequest.location.touched && editRequest.location.errors">
+        Location is required
+      </div>
+            <div class="form-group row">
+              <div class="col-lg-4"><label for="Date" class="mr-5">Date:</label></div>
+              <div class="col-lg-7">
+                      <input class="form-control" type="date"  placeholder="dd-mm-yyyy" formControlName="dateInput"
+                          name="dateInput" id="dateInput" required>
+              </div>
+          </div>
+          <div class="alert alert-danger" *ngIf="editRequest.dateInput.touched && editRequest.dateInput.errors">
+            Date is required
+          </div>
+          <div class="form-group row">
+            <div class="col-lg-4 align-center"><label for="stime" class="mr-5">Start Time:</label></div>
+            <div class="col-lg-7">
+                <ngb-timepicker formControlName="stime" [spinners]="false"></ngb-timepicker>
+            </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-4 align-center"><label for="etime" class="mr-5">End Time:</label></div>
+          <div class="col-lg-7">
+              <ngb-timepicker formControlName="etime" id="etime" [spinners]="false" ></ngb-timepicker>
+          </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-lg-4"><label for="orgEmail" class="mr-5">Organizer Email:</label></div>
+        <div class="col-lg-7"><input type="email" placeholder="Organizer's Email" formControlName="orgEmail"
+                name="orgEmail" class="form-control" id="orgEmail" disabled></div>
+    </div>
+    <div class="form-group row pt-10 pb-10">
+      <div class="col-lg-4"><label for="editEmail" class="mr-5 participant-email-label">Participant Email:</label>
+      </div>
+      <div class="col-lg-8">
+          <div>
+              <div class="row participant-email pt-10 pb-10" *ngFor="let editEmail of Editparticipant">
+                  <div class="col-md-8 align-center">{{editEmail}}</div>
+                  <div class="col-md-4"><button class="btn btn-outline-danger"
+                          (click)="removeParticipant(editEmail)"><i
+                              class="fa fa-trash-o delete-icon" aria-hidden="true"></i></button></div>
+              </div>
+          </div>
+          <div class="row ">
+              <div class="col-xl-7 col-lg-6">
+                  <input type="email" formControlName="editEmail"  placeholder="Participant's Email"  name="editEmail"
+                      class="form-control" id="editEmail" required>
+              </div>
+              <div class="col-xl-5 col-lg-6">
+                  <button class="btn btn-primary" 
+                      (click)="addParticipant(editRequest.editEmail.value); $event.preventDefault()">Add
+                      Participant</button>
+              </div>
+          </div>
+                <!-- <div class="alert alert-danger">
+                  <div *ngIf="editRequest.editEmail.errors.required">
+                      Participant's Email is required
+                  </div>
+                  <div *ngIf="editRequest.editEmail.errors.pattern && !editRequest.editEmail.errors.required">
+                      Email should be of format (xxxx@capco.com)
+                    </div>
+              </div> -->
+              
+              <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-8 mt-2 mb-5">
+                    <button type="submit" class="btn btn-primary submit-button"
+                        [disabled]="editRequest.invalid">Submit</button>
+                </div>
+            </div>
+            </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>
