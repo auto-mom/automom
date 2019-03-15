@@ -201,6 +201,7 @@ export class DashboardComponent implements OnInit {
     // this.editparticipatemail = editmodeldata;
     this.editmeetingForm(editmodeldata);
     this.editMeetingId = editmodeldata._id;
+    console.log("date format",editmodeldata.startTime);
     this.Editparticipant = editmodeldata.participantEmail;
     // console.log("edit part mail",this.editparticipatemail);
     // console.log(this.editparticipatemail)
@@ -235,7 +236,7 @@ export class DashboardComponent implements OnInit {
     this.meetService.editData(this.editMeetingData).then(
       (res: any) => {
         this.getMeeting();
-        console.log("edit service", res);
+        console.log("edit service", res);       
       },
       (err: any) => {
         console.log("edit service", err);
