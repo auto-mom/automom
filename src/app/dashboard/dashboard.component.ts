@@ -191,7 +191,7 @@ export class DashboardComponent implements OnInit {
   }
 
   removeParticipant(email) {
-    this.Editparticipant.pop(email);
+    this.Editparticipant.splice(this.Editparticipant.indexOf(email))
     console.log("pop array", this.Editparticipant);
     this.validateParticipantEmail();
   }
