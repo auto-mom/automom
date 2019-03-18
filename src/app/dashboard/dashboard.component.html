@@ -132,8 +132,8 @@
         <form #acceptTokenForm="ngForm" novalidate>
           <input type="text" class="form-control" [(ngModel)]="joinVirtualRoomReqObj.token" name="token" id="token"
             placeholder="Enter Token Here" required>
-          <div class="justify-content-end d-flex">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <div class="justify-content-end d-flex pt-10">
+            <button type="button" class="btn btn-secondary mr-10" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary" data-dismiss="modal"   (click)="joinVirtualRoom(joinVirtualRoomReqObj)">Enter</button>
           </div>
         </form>
