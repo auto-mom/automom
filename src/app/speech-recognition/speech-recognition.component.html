@@ -9,6 +9,9 @@
         <button class="btn btn-success w-50 justify-self-center" (click)="startButton($event)" *ngIf="!recognizing">Start</button>
         <button class="btn btn-danger w-50 justify-self-center" *ngIf="recognizing" (click)="stopButton()">Stop</button>
     </div>
+    <div style="text-align:center">
+        <button class="btn btn-primary justify-self-center" (click)="endMeetingData()">End</button>
+    </div>
     <div class="justify-self-center align-self-center">
       <p *ngIf="notification" class="notification mb-0">{{notification}}</p>
     </div>

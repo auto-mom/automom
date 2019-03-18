@@ -74,6 +74,7 @@ export class CreateMeetingRequestComponent implements OnInit {
     this.meetingService.postMeetingData(this.createMeetingData).then((res: any) => {
       console.log("meetingService", res)
       this.meetingRequest.reset();
+      alert("Meeting successfully created !!");
       const objectToDashboard = {
         meetingCreated: true
       }

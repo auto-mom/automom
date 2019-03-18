@@ -36,3 +36,7 @@ export class EditMeetingData {
 export class MeetingData {
     meetingData: GetMeetingData[];
 }
+
+export class EndMeeting{
+    id : string;
+}

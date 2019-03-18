@@ -58,4 +58,18 @@ export class MeetingService {
       );
     });
   }
+
+  // end Meeting
+  endMeetingData(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.httpPost("meeting/end", data).then(
+        res => {
+          resolve(res);
+        },
+        err => {
+          reject(err.error);  
+        }
+      );
+    });
+  }
 }

@@ -8,6 +8,8 @@ import { SpeechError } from '../shared/models/speech-models/speech-error';
 import { ActionContext } from '../shared/models/speech-models/strategy/action-context';
 import { SpeechRecognizerService } from '../core/services/speech-services/speech-recognizer.service';
 import { VirtualRoomService } from '../core/services/virtualRoom/virtual-room';
+import { MeetingService } from "../core/services/meeting-request/meeting-req";
+import { EndMeeting } from "../shared/models/meeting.model";
 
 @Component({
   selector: 'app-speech-recognition',
@@ -16,7 +18,8 @@ import { VirtualRoomService } from '../core/services/virtualRoom/virtual-room';
 })
 export class SpeechRecognitionComponent implements OnInit {
   ioConnection: any;
-  messages: Message[] = []
+  messages: Message[] = [];
+  endMeeting : EndMeeting;
   event: Event
   message: string
   finalTranscript = '';
@@ -30,9 +33,11 @@ export class SpeechRecognitionComponent implements OnInit {
   constructor(private socketService: WebSocketService,
     private changeDetector: ChangeDetectorRef,
     private speechRecognizer: SpeechRecognizerService,
-    private virtualRoomService: VirtualRoomService) {
+    private virtualRoomService: VirtualRoomService,
+    public meetService: MeetingService,) {
     this.event = new Event()
-    this.meetingId = this.virtualRoomService.getMeetingId()
+    this.meetingId = this.virtualRoomService.getMeetingId();
+    this.endMeeting = new EndMeeting();
   }
 
   ngOnInit() {
@@ -160,6 +165,22 @@ export class SpeechRecognitionComponent implements OnInit {
     this.messages.push(postData);
     console.log(this.messages)
     this.sendMessage(postData);
+  }
+
+  // end meeting
+  endMeetingData(){
+    console.log("meeting Id",this.meetingId);
+    this.endMeeting.id = this.virtualRoomService.getMeetingId();
+    // console.log('id',this.virtualRoomService.getMeetingId())
+    
+    this.meetService.endMeetingData(this.endMeeting).then(
+      (res: any) => {
+        console.log("edit service", res);       
+      },
+      (err: any) => {
+        console.log("edit service", err);
+      }
+    );
   }
 
 }
