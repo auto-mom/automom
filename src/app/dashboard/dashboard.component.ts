@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit {
   Editparticipant: Array<string> = [];
   editAllData: Array<Object> = [];
   editMeetingFlag: boolean = false;
-  confirmCancelMeeting: any;
+  confirmCancelMeeting: any = {};
   displayCreateMeetingForm: boolean = false;
 
   constructor(
@@ -117,6 +117,7 @@ export class DashboardComponent implements OnInit {
     this.meetService.cancelData(this.cancelData).then(
       (res: any) => {
         if (res.status == 'C') {
+          alert('Meeting Cancelled');
           this.getMeeting();
         }
         else {

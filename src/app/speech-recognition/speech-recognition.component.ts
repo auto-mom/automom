@@ -113,7 +113,7 @@ export class SpeechRecognitionComponent implements OnInit {
             id: this.meetingId,
             sender: this.userName,
             message: message,
-            timeStamp: new Date(),
+            timestamp: new Date(),
           }
           this.messages.push(postData)
           console.log("postData", this.messages)
@@ -155,7 +155,7 @@ export class SpeechRecognitionComponent implements OnInit {
       id: this.meetingId,
       sender: this.userName,
       message: message,
-      timeStamp: new Date(),
+      timestamp: new Date(),
     }
     this.messages.push(postData);
     console.log(this.messages)
