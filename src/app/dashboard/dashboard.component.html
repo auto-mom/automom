@@ -69,7 +69,7 @@
                   <button type="button" data-toggle="modal" data-target="#editMeetingModal" (click)="editMeeting(meetingData)" class="btn btn-success edit-btn2">Edit</button>
                 </div>
                 <div class="col-xs-6 cancel-btn p-left p--right">
-                  <button type="button" data-toggle="modal" data-target="#confirmDelete" (click)="confirmCancel(meetingData)" class="btn btn-danger">Cancel</button>
+                  <button type="button" (click)="cancel(meetingData)" class="btn btn-danger">Cancel</button>
                 </div>
               </div>
             </div>
@@ -154,7 +154,7 @@ aria-hidden="true" *ngIf="editMeetingFlag">
       </button>
     </div>
     <div class="modal-body">
-      <form class="form-group" [formGroup]="editReq" (ngSubmit)="onEditSubmit(editAllData)">
+      <form class="form-group" [formGroup]="editReq">
         <div class="form-group row">
           <div class="col-lg-4"><label for="agenda" class="mr-5">Agenda:</label></div>
           <div class="col-lg-7"><input type="text"  placeholder="Agenda" formControlName="agenda" name="agenda"
@@ -233,8 +233,7 @@ aria-hidden="true" *ngIf="editMeetingFlag">
               <div class="row">
                 <div class="col-lg-4"></div>
                 <div class="col-lg-8 mt-2 mb-5">
-                    <button type="submit" class="btn btn-primary submit-button"
-                        [disabled]="editRequest.invalid" data-dismiss="modal">Submit</button>
+                    <button type="submit" data-dismiss="modal" (click)="onEditSubmit(editAllData)"  class="btn btn-primary submit-button">Submit</button>
                 </div>
             </div>
             </div>

@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit {
   Editparticipant: Array<string> = [];
   editAllData: Array<Object> = [];
   editMeetingFlag: boolean = false;
-  confirmCancelMeeting: any;
+  confirmCancelMeeting: any = {};
   displayCreateMeetingForm: boolean = false;
 
   constructor(
@@ -117,6 +117,7 @@ export class DashboardComponent implements OnInit {
     this.meetService.cancelData(this.cancelData).then(
       (res: any) => {
         if (res.status == 'C') {
+          alert('Meeting Cancelled');
           this.getMeeting();
         }
         else {
@@ -199,20 +200,24 @@ export class DashboardComponent implements OnInit {
     this.validateParticipantEmail();
   }
   validateParticipantEmail() {
+    debugger
     console.log(this.Editparticipant.length == 0);
-    if (this.editRequest) {
+    if (this.editReq) {
+      debugger
       if (this.Editparticipant.length == 0) {
-        this.editRequest.editEmail.setErrors({ required: true });
+        this.editReq.controls.editEmail.setErrors({ required: true });
       } else {
-        this.editRequest.editEmail.setErrors({ required: false });
+        this.editReq.controls.editEmail.setErrors( null );
       }
     }
   }
 
   editMeeting(editmodeldata) {
     this.editMeetingFlag = true;
-    // this.editparticipatemail = editmodeldata;
+    this.editparticipatemail = editmodeldata;
+    this.Editparticipant = editmodeldata.participantEmail
     this.editmeetingForm(editmodeldata);
+    this.validateParticipantEmail()
     this.editMeetingId = editmodeldata._id;
     console.log("date format",editmodeldata.startTime);
     this.Editparticipant = editmodeldata.participantEmail;
@@ -221,11 +226,13 @@ export class DashboardComponent implements OnInit {
   }
 
   editmeetingForm(editmodeldata) {
+    console.log(editmodeldata)
+    debugger
     this.editReq = this.fb.group({
       agenda: [ editmodeldata.agenda,[Validators.required, Validators.maxLength(40)]],
       location: [editmodeldata.location, Validators.required],
       orgEmail: [this.organizerEmail],
-      editEmail: [editmodeldata.editEmail, this.validateParticipantEmail()],
+      editEmail: ['', this.validateParticipantEmail()],
       dateInput: [editmodeldata.meetingDate, Validators.required],
       stime: [editmodeldata.startTime, Validators.required],
       etime: [editmodeldata.endTime, Validators.required]
@@ -235,6 +242,7 @@ export class DashboardComponent implements OnInit {
   }
 
   onEditSubmit() {
+    debugger
     const endTime = this.editReq.value.etime.hour + ":" +this.editReq.value.etime.minute + ":" + this.editReq.value.etime.second;
     const startTime = this.editReq.value.stime.hour + ":" + this.editReq.value.stime.minute + ":" + this.editReq.value.stime.second;
     this.editMeetingData.participantEmail = this.Editparticipant;
