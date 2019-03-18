@@ -69,7 +69,7 @@
                   <button type="button" data-toggle="modal" data-target="#editMeetingModal" (click)="editMeeting(meetingData)" class="btn btn-success edit-btn2">Edit</button>
                 </div>
                 <div class="col-xs-6 cancel-btn p-left p--right">
-                  <button type="button" data-toggle="modal" data-target="#confirmDelete" (click)="confirmCancel(meetingData)" class="btn btn-danger">Cancel</button>
+                  <button type="button" (click)="cancel(meetingData)" class="btn btn-danger">Cancel</button>
                 </div>
               </div>
             </div>
