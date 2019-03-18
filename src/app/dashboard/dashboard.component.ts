@@ -172,6 +172,7 @@ export class DashboardComponent implements OnInit {
       (res: any) => {
         if (res.status == 'C') {
           this.createRoomData = res;
+          this.getMeeting();
           console.log("create room response ", this.createRoomData);
           // this.data.meetingData.forEach(user=>{
           //   if(user._id == this.createVRoom.id){
@@ -244,7 +245,7 @@ export class DashboardComponent implements OnInit {
     this.editMeetingData.agenda = this.editReq.value.agenda;
     this.editMeetingData.location = this.editReq.value.location;
     this.editMeetingData.id = this.editMeetingId;
-    console.log(this.editMeetingData);
+    console.log("edit data",this.editMeetingData);
     this.meetService.editData(this.editMeetingData).then(
       (res: any) => {
         this.getMeeting();
