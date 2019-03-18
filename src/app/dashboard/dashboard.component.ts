@@ -48,6 +48,7 @@ export class DashboardComponent implements OnInit {
   editAllData: Array<Object> = [];
   editMeetingFlag: boolean = false;
   confirmCancelMeeting: any;
+  displayCreateMeetingForm: boolean = false;
 
   constructor(
     public meetService: MeetingService,
@@ -79,7 +80,7 @@ export class DashboardComponent implements OnInit {
     //console.log(this.emailData);
     this.meetService.getData(this.emailData).then(
       (res: any) => {
-        if (res) {
+        if (res.status == 'C') {
           this.data.meetingData = res.meetings;
           console.log("Get all meetings ", this.data.meetingData);
           this.data.meetingData.forEach(meeting => {
@@ -148,6 +149,7 @@ export class DashboardComponent implements OnInit {
       (res: any) => {
         if (res.status == "C") {
           console.log(res);
+          this.virtualService.setMeetingId(this.meetingId)
           if (res) this.router.navigate(["/speechRecognition"]);
         } else {
           console.log(res.error[0].msg);
@@ -252,5 +254,12 @@ export class DashboardComponent implements OnInit {
         console.log("edit service", err);
       }
     );
+  }
+  objectFromCreateMeetingSuccess(event){
+    console.log(event)
+    if(event.meetingCreated){
+      this.displayCreateMeetingForm =false
+      this.getMeeting()
+    }
   }
 }

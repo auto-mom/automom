@@ -34,13 +34,16 @@
     </div>
     <div id="collapseThree" class="collapse justify-content-center" aria-labelledby="headingThree"
       data-parent="#accordion" *ngIf="displayCreateMeetingForm">
-      <app-create-meeting-request (postData)="getObjectFromCreateMeeting($event)"></app-create-meeting-request>
+      <app-create-meeting-request (postData)="objectFromCreateMeetingSuccess($event)"></app-create-meeting-request>
     </div>
   </div>
 </div>
 <!-- card block start -->
 <div class="container-fluid">
-  <div class="row m-none">
+  <div class="row m-none justify-content-center" *ngIf = "activeMeetings.length == 0">
+    <h4>No Meetings Available</h4>
+  </div>
+  <div class="row m-none" *ngIf = "activeMeetings.length != 0">
     <div class="col-xs-12 col-md-6 main-card" *ngFor="let meetingData of activeMeetings">
       <div class="card">
         <div class="card-body card-block">

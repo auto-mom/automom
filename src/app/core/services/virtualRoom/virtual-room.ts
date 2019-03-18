@@ -36,9 +36,11 @@ export class VirtualRoomService {
 
   setMeetingId(ID: any){
     this.meetingID=ID
+    console.log("meetingID",this.meetingID)
   }
 
   getMeetingId(){
+    console.log("meetingID",this.meetingID)
     return this.meetingID;
   }
 }
