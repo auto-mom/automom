@@ -10,6 +10,7 @@ import { SpeechRecognizerService } from '../core/services/speech-services/speech
 import { VirtualRoomService } from '../core/services/virtualRoom/virtual-room';
 import { MeetingService } from "../core/services/meeting-request/meeting-req";
 import { EndMeeting } from "../shared/models/meeting.model";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-speech-recognition',
@@ -34,7 +35,8 @@ export class SpeechRecognitionComponent implements OnInit {
     private changeDetector: ChangeDetectorRef,
     private speechRecognizer: SpeechRecognizerService,
     private virtualRoomService: VirtualRoomService,
-    public meetService: MeetingService,) {
+    public meetService: MeetingService,
+    private router: Router) {
     this.event = new Event()
     this.meetingId = this.virtualRoomService.getMeetingId();
     this.endMeeting = new EndMeeting();
@@ -172,10 +174,10 @@ export class SpeechRecognitionComponent implements OnInit {
     console.log("meeting Id",this.meetingId);
     this.endMeeting.id = this.virtualRoomService.getMeetingId();
     // console.log('id',this.virtualRoomService.getMeetingId())
-    
     this.meetService.endMeetingData(this.endMeeting).then(
       (res: any) => {
-        console.log("edit service", res);       
+        console.log("edit service", res); 
+        this.router.navigate(["/dashboard"]);      
       },
       (err: any) => {
         console.log("edit service", err);
