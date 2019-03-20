@@ -103,7 +103,7 @@ export class DashboardComponent implements OnInit {
 
   logout() {
     this.auth.isUserAuthenticated = false;
-    this.router.navigate(["/authentication/register"]);
+    this.router.navigate(["/authentication/login"]);
   }
 
   confirmCancel(meeting) {
