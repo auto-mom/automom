@@ -4,6 +4,7 @@ import { AuthService } from './services/authentication/auth';
 import { MeetingService } from "src/app/core/services/meeting-request/meeting-req";
 import { VirtualRoomService } from "src/app/core/services/virtualRoom/virtual-room";
 import { WebSocketService } from './services/web-sockets/web-socket';
+import { AuthGuard } from './guards/authGuard.guard';
 
 
 
@@ -16,7 +17,8 @@ import { WebSocketService } from './services/web-sockets/web-socket';
         AuthService,
         MeetingService,
         VirtualRoomService,
-        WebSocketService
+        WebSocketService,
+        AuthGuard
     ],
 })
 export class CoreModule {
