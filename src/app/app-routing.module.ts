@@ -19,7 +19,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard', component: DashboardComponent,
-    // , canActivate: [AuthGuard] 
+     canActivate: [AuthGuard], 
     children: [
       { path: '', redirectTo: 'meetingRequest', pathMatch: 'full' },
       { path: 'meetingRequest', component: CreateMeetingRequestComponent }
