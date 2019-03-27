@@ -14,6 +14,7 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 import { CreateMeetingRequestComponent } from './create-meeting-request/create-meeting-request.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { WebSpeechModule } from './speech-recognition/speech-recognition.module';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 const appRoutes: Routes = [
   // {path: 'home', component: AppComponent},
@@ -28,6 +29,7 @@ const appRoutes: Routes = [
     DashboardComponent,
     AuthenticationComponent,
     CreateMeetingRequestComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,

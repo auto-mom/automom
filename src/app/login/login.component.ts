@@ -70,4 +70,7 @@ export class LoginComponent implements OnInit {
   closeAlert() {
     this.alert.nativeElement.classList.remove("show");
   }
+  forgotPassword(){
+      this.router.navigate(["/forgot-password/"]);
+  }
 }

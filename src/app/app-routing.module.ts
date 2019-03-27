@@ -4,6 +4,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { AuthGuard } from './core/guards/authGuard.guard';
 import { CreateMeetingRequestComponent } from './create-meeting-request/create-meeting-request.component';
 import { SpeechRecognitionComponent } from './speech-recognition/speech-recognition.component';
@@ -22,10 +23,11 @@ const routes: Routes = [
      canActivate: [AuthGuard], 
     children: [
       { path: '', redirectTo: 'meetingRequest', pathMatch: 'full' },
-      { path: 'meetingRequest', component: CreateMeetingRequestComponent }
+      { path: 'meetingRequest', component: CreateMeetingRequestComponent },
     ]
   },
-  { path: 'speechRecognition', component: SpeechRecognitionComponent }
+  { path: 'speechRecognition', component: SpeechRecognitionComponent },
+  { path: 'forgot-password/:id',component: ForgotPasswordComponent },
 ]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
