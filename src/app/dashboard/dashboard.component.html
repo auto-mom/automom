@@ -2,12 +2,25 @@
   <ul class="navbar-nav nav-content">
     <li class="nav-item active col-6">
       <header>
-        <h1 class="capcologo">CAPCO</h1>
+        <h1 class="capcologo">
+          CAPCO
+        </h1>
       </header>
     </li>
     <li class="logout justify-content-end col-6">
-      <span class="text-white" data-toggle="modal" data-target="#resetPassword">Reset Password</span>
-      <span (click)="logout()" class="text-white pl-20">Logout</span>
+      <span class="dropdown mr-10">
+        <i class="fas fa-basketball-ball"></i>
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          {{ username }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item flex pointer" data-toggle="modal" data-target="#resetPassword">
+            Reset Password
+          </a>
+          <a class="dropdown-item flex pointer" (click)="logout()">Logout</a>
+        </div>
+      </span>
     </li>
   </ul>
 </nav>
@@ -264,8 +277,8 @@
         <p>Are you sure you want to cancel meeting?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger"
-          data-dismiss="modal" (click)="cancel(confirmCancelMeeting)">Yes</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal"
+          (click)="cancel(confirmCancelMeeting)">Yes</button>
         <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
       </div>
     </div>
@@ -286,9 +299,9 @@
         <input type="password" name="newPassword" id="newPassword" class="form-control" [(ngModel)]="newPassword">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success"
-          data-dismiss="modal" (click)="resetPassword()">Yes</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="resetPassword()">Change
+          Password</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
       </div>
     </div>
   </div>
