@@ -49,6 +49,7 @@ export class DashboardComponent implements OnInit {
   editMeetingFlag: boolean = false;
   confirmCancelMeeting: any = {};
   displayCreateMeetingForm: boolean = false;
+  newPassword: string;
 
   constructor(
     public meetService: MeetingService,
@@ -84,7 +85,7 @@ export class DashboardComponent implements OnInit {
           this.data.meetingData = res.meetings;
           console.log("Get all meetings ", this.data.meetingData);
           this.data.meetingData.forEach(meeting => {
-            if (meeting.status == "y") {
+            if (meeting.status == "n") {
               this.activeMeetings.push(meeting);
             }
           });
@@ -106,13 +107,21 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(["/authentication/login"]);
   }
 
+  /**
+   * Confirm cancel function giving selected instance data to modal popup
+   * @param meeting 
+   */
   confirmCancel(meeting) {
     this.confirmCancelMeeting = meeting;
-    console.log('Confirm Cancel', meeting);
+    // console.log('Confirm Cancel', meeting);
   }
 
+  /**
+   * Cancels meeting
+   * @param cancelMeeting 
+   */
   cancel(cancelMeeting) {
-    this.cancelData.id = cancelMeeting._id;
+    this.cancelData.id = this.confirmCancelMeeting._id;
     this.cancelData.status = "n";
     this.meetService.cancelData(this.cancelData).then(
       (res: any) => {
@@ -121,7 +130,7 @@ export class DashboardComponent implements OnInit {
           this.getMeeting();
         }
         else {
-          console.log('Cancel Meeting error')
+          console.log('Cancel Meeting error');
         }
       },
       (err: any) => {
@@ -270,5 +279,17 @@ export class DashboardComponent implements OnInit {
       this.displayCreateMeetingForm =false
       this.getMeeting()
     }
+  }
+
+  /**
+   * Resets user password
+   */
+  resetPassword() {
+    let payload = {
+      email: sessionStorage.getItem('emailID'),
+      password: this.newPassword
+    }
+    console.log('Reset Password Test');
+
   }
 }

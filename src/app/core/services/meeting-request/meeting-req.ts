@@ -20,7 +20,7 @@ export class MeetingService {
 
   postMeetingData(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.httpPost("meeting", data).then(
+      this.http.httpPost("meeting/new", data).then(
         res => {
           resolve(res);
         },

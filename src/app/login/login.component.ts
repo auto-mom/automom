@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { LoginDetails } from "../shared/models/auth-model";
 import { AuthService } from "../core/services/authentication/auth";
 import { Router } from "@angular/router";
+import { ForgotPasswordService } from '../core/services/forgot-password/forgot-password.service';
 
 @Component({
   selector: "app-login",
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
   // emailID:string = this.loginData.email;
   // password: string = this.loginData.password;
   response: any;
+  public forgotPasswordEmail: string = '';
 
   // value = JSON.stringify(value);
   // Create item:
@@ -32,7 +34,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private forgotPasswordService: ForgotPasswordService
   ) {
     this.loginData = new LoginDetails();
   }
@@ -70,7 +73,27 @@ export class LoginComponent implements OnInit {
   closeAlert() {
     this.alert.nativeElement.classList.remove("show");
   }
-  forgotPassword(){
-      this.router.navigate(["/forgot-password/"]);
+
+
+  /**
+   * Forgot password
+   * @param email 
+   */
+  forgotPassword(email){
+    let payload = {
+      email: email
+    }
+
+    this.forgotPasswordService.forgotPassword(payload).then(res => {
+      if(res.status == 'C') {
+        console.log('Forgot Password Status: C');
+      }
+      else {
+        alert(res.error[0].msg);
+        console.log('Forgot Password Status: E');
+      }
+    });
+
+
   }
 }
