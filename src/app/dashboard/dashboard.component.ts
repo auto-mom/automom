@@ -51,6 +51,7 @@ export class DashboardComponent implements OnInit {
   confirmCancelMeeting: any = {};
   displayCreateMeetingForm: boolean = false;
   newPassword: string;
+  username: string = sessionStorage.getItem('UserName');
 
   constructor(
     public meetService: MeetingService,
