@@ -29,9 +29,10 @@
   <div class="input-group mb-3">
     <input [type]="show ? 'text': 'password'" formControlName="password" name="pwd" class="form-control" id="pwd"
       required>
-    <div class="input-group-append pointer" (click)="this.show = !this.show">
+    <div class="input-group-append pointer" (click)="show = !show">
       <span class="input-group-text" style="background-color:white">
-        <i class="fa fa-eye"></i>
+        <i *ngIf="show" class="fa fa-eye"></i>
+        <i *ngIf="!show" class="fa fa-eye-slash"></i>
       </span>
     </div>
   </div>
@@ -48,9 +49,10 @@
   <div class="input-group mb-3">
     <input [type]="confShow ? 'text' : 'password'" formControlName="cnfPassword" name="confirm-pwd" class="form-control" id="confirm-pwd"
       required>
-    <div (click)="this.confShow = !this.confShow" class="input-group-append pointer">
+    <div (click)="confShow = !confShow" class="input-group-append pointer">
       <span class="input-group-text" style="background-color:white">
-        <i class="fa fa-eye"></i>
+          <i *ngIf="confShow" class="fa fa-eye"></i>
+          <i *ngIf="!confShow" class="fa fa-eye-slash"></i>
       </span>
     </div>
     <div *ngIf="!userForm.cnfPassword.errors" class="input-group-append">
