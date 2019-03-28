@@ -31,8 +31,8 @@
       required>
     <div class="input-group-append pointer" (click)="show = !show">
       <span class="input-group-text" style="background-color:white">
-        <i *ngIf="show" class="fa fa-eye"></i>
-        <i *ngIf="!show" class="fa fa-eye-slash"></i>
+        <i *ngIf="show" class="fa fa-eye" title="Hide Password"></i>
+        <i *ngIf="!show" class="fa fa-eye-slash" title="Show Password"></i>
       </span>
     </div>
   </div>
@@ -51,8 +51,8 @@
       required>
     <div (click)="confShow = !confShow" class="input-group-append pointer">
       <span class="input-group-text" style="background-color:white">
-          <i *ngIf="confShow" class="fa fa-eye"></i>
-          <i *ngIf="!confShow" class="fa fa-eye-slash"></i>
+          <i *ngIf="confShow" class="fa fa-eye" title="Hide Password"></i>
+          <i *ngIf="!confShow" class="fa fa-eye-slash" title="Show Password"></i>
       </span>
     </div>
     <div *ngIf="!userForm.cnfPassword.errors" class="input-group-append">

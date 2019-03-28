@@ -16,8 +16,8 @@
     <input [type]="show ? 'text' : 'password'" formControlName="logPass" class="form-control" id="pwd">
     <div class="input-group-append pointer" (click)="showPassword()">
       <span class="input-group-text" style="background-color:white">
-        <i *ngIf="show" class="fa fa-eye"></i>
-        <i *ngIf="!show" class="fa fa-eye-slash"></i>
+        <i *ngIf="show" class="fa fa-eye" title="Hide Password"></i>
+        <i *ngIf="!show" class="fa fa-eye-slash" title="Show Password"></i>
       </span>
     </div>
   </div>
