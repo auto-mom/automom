@@ -13,11 +13,11 @@
     <input type="password" formControlName="logPass" class="form-control" id="pwd">
   </div>
   <div class="alert alert-danger" *ngIf="userForm.logPass.touched && userForm.logPass.errors">
-    <div *ngIf="userForm.logPfass.errors.required">
+    <div *ngIf="userForm.logPass.errors.required">
       Password is required
     </div>
   </div>
-  <div class="forget-pass" data-toggle="modal" data-target="#myModal">
+  <div class="forget-pass lablForgot" data-toggle="modal" data-target="#myModal">
     <span>Forgot Password</span>
   </div>
   <div class="pt-3">
@@ -31,6 +31,8 @@
     Username or password is incorrect
   </div>
 </form>
+
+{{ emailSentSuccessfully }}
  <!-- forget password  Modal  -->
  <div class="modal" id="myModal">
   <div class="modal-dialog">
@@ -46,7 +48,7 @@
        <form>
           <div class="form-group">
               <label for="usr">Email</label>
-              <input type="text" class="form-control" id="usr" [(ngModel)]="forgotPasswordEmail" name="forgetemail">
+              <input type="text" class="form-control" id="usr" [(ngModel)]="forgotPasswordEmail" name="forgetemail" required>
             </div>
        </form>
       </div>

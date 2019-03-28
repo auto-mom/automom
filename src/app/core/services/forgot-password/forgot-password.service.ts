@@ -20,4 +20,31 @@ export class ForgotPasswordService {
       );
     });
   }
+
+  resetPassword(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.httpPut("password/new", data).then(
+        res => {
+          resolve(res);
+        },
+        err => {
+          reject(err.error);
+        }
+      );
+    });
+  }
+
+  forgotPass(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.httpPost("password/reset", data).then(
+        res => {
+          resolve(res);
+        },
+        err => {
+          reject(err.error);
+        }
+      );
+    });
+  }
+
 }

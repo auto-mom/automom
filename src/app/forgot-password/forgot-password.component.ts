@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { ForgotPasswordService } from '../core/services/forgot-password/forgot-password.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -11,10 +12,11 @@ export class ForgotPasswordComponent implements OnInit {
   newPass: String = '';
   confirmPass: String = '';
   constructor(
-    private router: Router
+    private router: Router,
+    private forgotPasswordService: ForgotPasswordService,
   ) {
-    // this.token = window.location.href.toString().slice(39);
-    // console.log(this.token);
+    this.token = window.location.href.toString().slice(38);
+    console.log(this.token);
    }
 
   ngOnInit() {
@@ -22,25 +24,21 @@ export class ForgotPasswordComponent implements OnInit {
   /**
    * Forgot Password Function
   */
-  // forgotPass() {
-  //   this.payload = {
-  //    password :this.newPass,
-  //    token: this.token
-  //   }
-  //   Service.forgotPass(this.payload).subscribe(res => {
-  //     if(res.status == 'C'){
-      
-  
-  //     }
-  //     else {
-  //       alert('Something went wrong')
-  //       console.log('forgot password service err');
-  //     }
-  //   },
-  // err => {
-  //   console.log(err);
-  // })
-    
-  // }
-
+  forgotPass(confpass) {
+    let payload = {
+     password :confpass,
+     token: this.token
+    }
+  this.forgotPasswordService.forgotPass(payload).then(res => {
+    if(res.status == 'C') {
+      console.log('Change password successfull');
+      this.router.navigate['/authentication/login'];
+    }
+    else {
+      alert(res.error[0].msg);
+      console.log('Change password is falied');
+      this.router.navigate['/authentication/login'];
+    }
+  }); 
+  }
 }

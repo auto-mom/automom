@@ -9,6 +9,7 @@ import { AuthService } from "../core/services/authentication/auth";
 import { Router } from "@angular/router";
 import { JoinVirtualRoom } from "../shared/models/virtualRoom";
 import { GetMeetingData, MeetingData ,EditMeetingData } from "../shared/models/meeting.model";
+import { ForgotPasswordService } from '../core/services/forgot-password/forgot-password.service';
 
 @Component({
   selector: "app-dashboard",
@@ -56,7 +57,8 @@ export class DashboardComponent implements OnInit {
     public virtualService: VirtualRoomService,
     private auth: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private forgotPasswordService: ForgotPasswordService
   ) {
     this.editMeetingData = new EditMeetingData();
     this.emailData = new IdDetails();
@@ -289,7 +291,15 @@ export class DashboardComponent implements OnInit {
       email: sessionStorage.getItem('emailID'),
       password: this.newPassword
     }
-    console.log('Reset Password Test');
-
+    // console.log('Reset Password Test');
+    this.forgotPasswordService.resetPassword(payload).then(res => {
+      if(res.status == 'C') {
+        console.log('Reset password successfull');
+      }
+      else {
+        alert(res.error[0].msg);
+        console.log('Reset password is falied');
+      }
+    });
   }
 }
