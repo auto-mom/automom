@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   loginData: LoginDetails;
   loginError: boolean = false;
   public emailSentSuccessfully: string = '';
-  public emailSent: boolean = false;
+  public linkSent: boolean = false;
   // private emailId : string = '';
   // private password : string = '';
   // emailID:string = this.loginData.email;
@@ -88,11 +88,8 @@ export class LoginComponent implements OnInit {
 
     this.forgotPasswordService.forgotPassword(payload).then(res => {
       if(res.status == 'C') {
-        setTimeout(()=> {
-          this.emailSent = true;
-          this.emailSentSuccessfully = 'Email has been sent to reset your password';
-        }, 3000);
-        // this.router.navigate(["/forgot-password/token"]);
+        this.linkSent = true;
+        this.emailSentSuccessfully = 'Email has been sent to reset your password';
       }
       else {
         alert(res.error[0].msg);
