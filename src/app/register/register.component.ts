@@ -17,8 +17,12 @@ export class RegisterComponent implements OnInit {
   successfullyRegistered: boolean = false;
   unsuccessfullRegistration: boolean = false;
   errorMessage: any;
+  show: boolean;
+  confShow: boolean;
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.registrationData = new RegistrationDetails();
+    this.show = false;
+    this.confShow = false;
   }
   ngOnInit() {
     this.registerForm = this.fb.group({
