@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   // password: string = this.loginData.password;
   response: any;
   public forgotPasswordEmail: string = '';
+  show: boolean;
 
   // value = JSON.stringify(value);
   // Create item:
@@ -40,6 +41,7 @@ export class LoginComponent implements OnInit {
     private forgotPasswordService: ForgotPasswordService
   ) {
     this.loginData = new LoginDetails();
+    this.show = false;
   }
 
   ngOnInit() {
@@ -62,7 +64,7 @@ export class LoginComponent implements OnInit {
           console.log(res.token);
           sessionStorage.setItem("emailID", this.loginData.email);
           sessionStorage.setItem("token", res.token);
-          sessionStorage.setItem("UserName", (res.user.firstName +" "+res.user.lastName));
+          sessionStorage.setItem("UserName", (res.user.firstName + " " + res.user.lastName));
           this.router.navigate(["/dashboard"]);
         }
       },
@@ -81,13 +83,13 @@ export class LoginComponent implements OnInit {
    * Forgot password
    * @param email 
    */
-  forgotPassword(email){
+  forgotPassword(email) {
     let payload = {
       email: email
     }
 
     this.forgotPasswordService.forgotPassword(payload).then(res => {
-      if(res.status == 'C') {
+      if (res.status == 'C') {
         this.linkSent = true;
         this.emailSentSuccessfully = 'Email has been sent to reset your password';
       }
@@ -99,4 +101,12 @@ export class LoginComponent implements OnInit {
 
 
   }
+
+  /**
+   * Shows password
+   */
+  showPassword() {
+    this.show = !this.show;
+  }
+  
 }
