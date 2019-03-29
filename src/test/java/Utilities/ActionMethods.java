@@ -7,6 +7,11 @@ import StepDefinition.Login;
 
 public class ActionMethods 
 {
+	
+	/**
+	 * @author SHUBHAM BARDE
+	 * Description: Common method to enter text in a textbox 
+	 */
 	public static void enterText(String property, String locator, String value)
 	{
 		switch (property) 
@@ -23,6 +28,10 @@ public class ActionMethods
 		}
 	}
 	
+	/**
+	 * @author SHUBHAM BARDE
+	 * Description: Common method to click on button 
+	 */
 	public static void clickButton(String property, String value)
 	{
 		switch (property) 
@@ -38,6 +47,4 @@ public class ActionMethods
 				break;
 		}
 	}
-	
-	
 }
