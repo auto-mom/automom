@@ -5,3 +5,10 @@
 .pointer {
     cursor: pointer;
 }
+
+// MVP2 - 2.1 Green tick icon if passwords match
+span {
+    i .fa fa-check ::before {
+    color: green; 
+    }
+}

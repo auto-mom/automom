@@ -13,6 +13,7 @@
   </div>
   <label for="pwd">Password:</label>
   <div class="input-group mb-3">
+    <!-- MVP2 - Start of 2.3 See Password Button with eye icon -->
     <input [type]="show ? 'text' : 'password'" formControlName="logPass" class="form-control" id="pwd">
     <div class="input-group-append pointer" (click)="showPassword()">
       <span class="input-group-text" style="background-color:white">
@@ -20,15 +21,16 @@
         <i *ngIf="!show" class="fa fa-eye-slash" title="Show Password"></i>
       </span>
     </div>
+    <!-- MVP2 - End of 2.3 See Password Button with eye icon -->
   </div>
   <div class="alert alert-danger" *ngIf="userForm.logPass.touched && userForm.logPass.errors">
     <div *ngIf="userForm.logPass.errors.required">
       Password is required
     </div>
   </div>
-  <div class="forget-pass lablForgot" data-toggle="modal" data-target="#myModal">
-    <span>Forgot Password</span>
-  </div>
+  <!--  MVP2 - Start of 2.4 Forgot Password -->
+  <span class="forget-pass lablForgot" data-toggle="modal" data-target="#myModal">Forgot Password</span>
+  <!--  MVP2 - End of 2.4 Forgot Password -->
   <div class="pt-3">
     <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Submit</button>
   </div>
@@ -49,6 +51,7 @@
   {{ emailSentSuccessfully }}
 </div>
 
+<!--  MVP2 - Start of 2.4 Forgot Password -->
 <!-- Forget password Modal  -->
 <div class="modal" id="myModal">
   <div class="modal-dialog">
@@ -77,3 +80,4 @@
     </div>
   </div>
 </div>
+<!--  MVP2 - End of 2.4 Forgot Password -->
