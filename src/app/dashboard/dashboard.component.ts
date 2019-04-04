@@ -90,8 +90,12 @@ export class DashboardComponent implements OnInit {
         if (res.status == 'C') {
           this.data.meetingData = res.meetings;
           console.log("Get all meetings ", this.data.meetingData);
+          this.data.meetingData.forEach(function(meeting){
+            meeting.formattedStartTime = new Date(meeting.startTime);
+            meeting.formattedEndTime = new Date(meeting.endTime);
+        });
           this.data.meetingData.forEach(meeting => {
-            if (meeting.status == "n") {
+            if (meeting.status == "y") {
               this.activeMeetings.push(meeting);
             }
           });
@@ -128,7 +132,6 @@ export class DashboardComponent implements OnInit {
    */
   cancel(cancelMeeting) {
     this.cancelData.id = this.confirmCancelMeeting._id;
-    this.cancelData.status = "n";
     this.meetService.cancelData(this.cancelData).then(
       (res: any) => {
         if (res.status == 'C') {

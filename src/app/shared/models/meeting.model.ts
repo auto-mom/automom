@@ -20,6 +20,8 @@ export class GetMeetingData {
     _id: string;
     token: string;
     status: string
+    formattedStartTime: Date;
+    formattedEndTime: Date;
 }
 
 export class EditMeetingData {
