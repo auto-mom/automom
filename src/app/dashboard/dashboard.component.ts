@@ -78,6 +78,9 @@ export class DashboardComponent implements OnInit {
     //console.log(this.data);
   }
 
+  /**
+   * Gets all meeting
+   */
   getMeeting() {
     this.emailData.email = sessionStorage.getItem("emailID");
     this.activeMeetings = [];

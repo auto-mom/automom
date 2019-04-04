@@ -1,21 +1,21 @@
 <form class="form-group" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="name">First Name:</label>
-    <input type="text" formControlName="fname" name="fname" class="form-control" id="fname" required>
+    <input type="text" formControlName="fname" name="fname" class="form-control" id="fname" placeholder="First Name" required>
   </div>
   <div class="alert alert-danger" *ngIf="userForm.fname.touched && userForm.fname.errors">
     First Name is required
   </div>
   <div class="form-group">
     <label for="name">Last Name:</label>
-    <input type="text" formControlName="lname" name="lname" class="form-control" id="lname" required>
+    <input type="text" formControlName="lname" name="lname" class="form-control" id="lname" placeholder="Last Name" required>
   </div>
   <div class="alert alert-danger" *ngIf="userForm.lname.touched && userForm.lname.errors">
     Last Name is required
   </div>
   <div class="form-group">
     <label for="email">Email address:</label>
-    <input type="email" formControlName="email" name="email" class="form-control" id="email" required>
+    <input type="email" formControlName="email" name="email" class="form-control" id="email" placeholder="Email Address" required>
   </div>
   <div class="alert alert-danger" *ngIf="userForm.email.touched && userForm.email.errors">
     <div *ngIf="userForm.email.errors.required">
@@ -28,7 +28,7 @@
   <label for="pwd">Password:</label>
   <div class="input-group mb-3">
     <input [type]="show ? 'text': 'password'" formControlName="password" name="pwd" class="form-control" id="pwd"
-      required>
+    placeholder="Password" required>
     <!-- MVP2 - Start of 2.2 Eye closed and open icon if password is visible or **** -->
     <div class="input-group-append pointer" (click)="show = !show">
       <span class="input-group-text" style="background-color:white">
@@ -51,7 +51,7 @@
   <label for="confirm-pwd">Confirm Password:</label>
   <div class="input-group mb-3">
     <input [type]="confShow ? 'text' : 'password'" formControlName="cnfPassword" name="confirm-pwd" class="form-control"
-      id="confirm-pwd" required>
+      id="confirm-pwd" placeholder="Confirm Password" required>
     <!-- MVP2 - Start of 2.2 Eye closed and open icon if password is visible or **** -->
     <div (click)="confShow = !confShow" class="input-group-append pointer">
       <span class="input-group-text" style="background-color:white">

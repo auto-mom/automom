@@ -1,7 +1,7 @@
 <form class="form-main-block" [formGroup]="loginForm" (ngSubmit)="login()">
   <div class="form-group">
     <label for="email">Email address:</label>
-    <input type="email" formControlName="logEmail" class="form-control" id="email">
+    <input type="email" formControlName="logEmail" class="form-control" placeholder="Email Address" id="email">
   </div>
   <div class="alert alert-danger" *ngIf="userForm.logEmail.touched && userForm.logEmail.errors">
     <div *ngIf="userForm.logEmail.errors.required">
@@ -14,7 +14,7 @@
   <label for="pwd">Password:</label>
   <div class="input-group mb-3">
     <!-- MVP2 - Start of 2.3 See Password Button with eye icon -->
-    <input [type]="show ? 'text' : 'password'" formControlName="logPass" class="form-control" id="pwd">
+    <input [type]="show ? 'text' : 'password'" formControlName="logPass" class="form-control" placeholder="Password" id="pwd">
     <div class="input-group-append pointer" (click)="showPassword()">
       <span class="input-group-text" style="background-color:white">
         <i *ngIf="show" class="fa fa-eye" title="Hide Password"></i>
