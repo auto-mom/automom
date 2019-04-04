@@ -17,10 +17,10 @@ export class AuthenticationComponent implements OnInit {
 
   ngOnInit() {
     this.register=true;
-    console.log("router url:",this.router.url)
+    // console.log("router url:",this.router.url)
   }
 
   getURL(){
-    console.log(this.router.url)
+    // console.log(this.router.url)
   }
 }

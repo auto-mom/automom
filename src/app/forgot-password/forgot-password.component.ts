@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { ForgotPasswordService } from '../core/services/forgot-password/forgot-password.service';
 
 @Component({
@@ -8,37 +8,40 @@ import { ForgotPasswordService } from '../core/services/forgot-password/forgot-p
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
+  // MVP2 - Start of 2.4 Forgot Password
   token: String = '';
   newPass: String = '';
   confirmPass: String = '';
   constructor(
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private forgotPasswordService: ForgotPasswordService,
-  ) {
-    this.token = window.location.href.toString().slice(38);
-    console.log(this.token);
-   }
+  ) { }
 
   ngOnInit() {
+    this.token = this.activatedRoute.snapshot.params['id'];
+    //console.log(this.token);
   }
   /**
    * Forgot Password Function
   */
   forgotPass(confpass) {
     let payload = {
-     password :confpass,
-     token: this.token
+      password: confpass,
+      token: this.token
     }
-  this.forgotPasswordService.forgotPass(payload).then(res => {
-    if(res.status == 'C') {
-      console.log('Change password successfull');
-      this.router.navigate['/authentication/login'];
-    }
-    else {
-      alert(res.error[0].msg);
-      console.log('Change password is falied');
-      this.router.navigate['/authentication/login'];
-    }
-  }); 
+    this.forgotPasswordService.forgotPass(payload).then(res => {
+      if (res.status == 'C') {
+        alert('Password Successfully changed');
+        console.log('Change password successfull');
+        this.router.navigate(['authentication/login']);
+      }
+      else {
+        alert(res.message);
+        console.log('Change password is falied');
+        // this.router.navigate(['authentication/login']);
+      }
+    });
   }
+  // MVP2 - Start of 2.4 Forgot Password
 }
