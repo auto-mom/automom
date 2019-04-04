@@ -29,7 +29,7 @@ export class CreateMeetingRequestComponent implements OnInit {
     this.selectedDate = this.todaysDate[0]
     console.log(this.selectedDate)
     this.organizerEmail = sessionStorage.getItem('emailID');
-    
+
   }
 
   ngOnInit() {
@@ -60,9 +60,9 @@ export class CreateMeetingRequestComponent implements OnInit {
     this.validateParticipantEmail()
   }
   onSubmit() {
-    console.log(this.meetingRequest)
-    const endTime = (this.meetingRequest.value.etime.hour + ":" + this.meetingRequest.value.etime.minute + ":" + this.meetingRequest.value.etime.second)
-    const startTime = (this.meetingRequest.value.stime.hour + ":" + this.meetingRequest.value.stime.minute + ":" + this.meetingRequest.value.stime.second)
+    console.log(this.meetingRequest);
+    const endTime = new Date('2999/01/01').toDateString() + ' ' + (this.meetingRequest.value.etime.hour + ":" + this.meetingRequest.value.etime.minute + ":" + this.meetingRequest.value.etime.second)
+    const startTime = new Date('2999/01/01').toDateString() + ' ' + (this.meetingRequest.value.stime.hour + ":" + this.meetingRequest.value.stime.minute + ":" + this.meetingRequest.value.stime.second)
     this.createMeetingData.participantEmail = this.emailArr;
     this.createMeetingData.organizerEmail = this.meetingRequest.value.orgEmail
     this.createMeetingData.meetingDate = this.meetingRequest.value.dateInput;
@@ -72,13 +72,18 @@ export class CreateMeetingRequestComponent implements OnInit {
     this.createMeetingData.location = this.meetingRequest.value.location
     console.log(this.createMeetingData)
     this.meetingService.postMeetingData(this.createMeetingData).then((res: any) => {
-      console.log("meetingService", res)
-      this.meetingRequest.reset();
-      alert("Meeting successfully created !!");
-      const objectToDashboard = {
-        meetingCreated: true
+      if(res.status == 'C') {
+        console.log("meetingService", res)
+        this.meetingRequest.reset();
+        alert("Meeting successfully created !!");
+        const objectToDashboard = {
+          meetingCreated: true
+        }
+        this.postData.emit(objectToDashboard)
       }
-      this.postData.emit(objectToDashboard)
+      else {
+        alert('An error occured while creating meeting');
+      }
     },
       (err: any) => {
         console.log("meetingService", err)
